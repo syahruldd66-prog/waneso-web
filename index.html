@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Voucher WiFi - Arulmodss</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body { font-family: 'Poppins', sans-serif; background: #0f172a; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; width: 300px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; box-sizing: border-box; background: rgba(255,255,255,0.05); color: white; }
+        button { width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; margin-top: 10px; }
+        h2 { margin-top: 0; }
+    </style>
+</head>
+<body>
+
+<div class="glass">
+    <h2>Voucher WiFi</h2>
+    <p>Paket: <b>5k / 24 Jam</b></p>
+    
+    <form id="orderForm">
+        <input type="text" id="nama" placeholder="Nama Kamu" required>
+        <input type="number" id="wa" placeholder="Nomor WA (contoh: 628123...)" required>
+        <button type="button" onclick="pesanWA()">Pesan via WhatsApp</button>
+    </form>
+</div>
+
+<script>
+    function pesanWA() {
+        var nama = document.getElementById('nama').value;
+        var wa = document.getElementById('wa').value;
+        
+        if(nama == "" || wa == "") {
+            alert("Harap isi nama dan nomor WA!");
+            return;
+        }
+
+        // Data Bot
+        var token = "8660795119:AAEgPE7BDUs-ZiY1yfvGs328ImMuSrxo4Z0";
+        var chatId = "1424892421";
+        var teks = "🛒 *Order WiFi 5k/24jam*%0A%0A👤 Nama: " + nama + "%0A📞 WA: " + wa;
+
+        // Kirim ke Telegram
+        var urlBot = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chatId + "&text=" + teks + "&parse_mode=markdown";
+        fetch(urlBot);
+
+        // Redirect ke WhatsApp (Ganti 628XXXXXXXXXX dengan nomor WA kamu)
+        var teksWA = "Halo Arul, saya mau beli Voucher WiFi 5k/24jam.%0A%0ANama: " + nama + "%0ANomor WA: " + wa;
+        setTimeout(function(){
+            window.location.href = "https://wa.me/6282293795296?text=" + teksWA; 
+        }, 500);
+    }
+</script>
+
+</body>
+</html>
